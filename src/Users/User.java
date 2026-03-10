@@ -19,8 +19,12 @@ public class User {
     }
 
     public User(String name, String email){
-        setName(name);
-        setEmail(email);
-}
+        this.name = name;
+        this.email = email;
+    }
 
+    @Override
+    public String toString() {
+        return name;
+    }
 }

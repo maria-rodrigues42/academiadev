@@ -1,48 +1,70 @@
-import Courses.BasicPlan;
-import Courses.Course;
-import Courses.CourseCatalog;
-import Courses.PremiumPlan;
-import Support.SupportTicket;
-import Users.Admin;
-import Users.User;
-import Users.Student;
 
-import java.time.Duration;
-import java.util.Map;
+import Courses.CourseCatalog;
+import Support.SupportTicket;
+import Users.User;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Scanner;
+import systemFunctions.MenuActionsList;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        //variaveis para guardar os dados do sistema: cursos e usuarios e os ticket de suporte
         CourseCatalog catalogo = new CourseCatalog();
         Map<String, User> usuarios = new HashMap<>();
+        Queue<SupportTicket> filaDeTicketSuporte = new LinkedList<>();
+        Scanner scanner = new Scanner(System.in);
 
-        Queue<SupportTicket> filaDeTicketSuporte = new LinkedList<>(); // <> significa que so vai aceitar objetos daquela classe estrita na fila, Map, array, etc. blindagem
+        InitialData.carregarDados(catalogo, usuarios);
+        MenuActionsList.inicializar(usuarios, catalogo, filaDeTicketSuporte, scanner);
 
-        //variaveis para controle do menu
-
-
+        int escolha;
         System.out.println("====== Academia Dev ======\n\n");
-        do{
+        do {
+            MenuActionsList.mostrarMenu();
+            System.out.print("Escolha uma opção: ");
+            while (!scanner.hasNextInt()) {
+                System.out.print("Digite um número válido: ");
+                scanner.next();
+            }
+            escolha = scanner.nextInt();
+            scanner.nextLine();
 
+            if (escolha == 0) {
+                System.out.println("Saindo...");
+                break;
+            }
 
-            //====LOGIN
+            switch(escolha) {
+                case 1:
+                    System.out.print("Digite seu email: ");
+                    MenuActionsList.Login(scanner.nextLine());
+                    break;
+                case 2:
+                    System.out.print("Nome: ");
+                    String nome = scanner.nextLine();
+                    System.out.print("Email: ");
+                    String email = scanner.nextLine();
+                    System.out.print("Plano (basic/premium): ");
+                    MenuActionsList.CadastrarAluno(nome, email, scanner.nextLine());
+                    break;
+                case 3:
+                    System.out.print("Email: ");
+                    String emailTicket = scanner.nextLine();
+                    System.out.print("Título: ");
+                    String titulo = scanner.nextLine();
+                    System.out.print("Mensagem: ");
+                    MenuActionsList.AbrirTicket(emailTicket, titulo, scanner.nextLine());
+                    break;
+                case 4:
+                    MenuActionsList.ListarCursos();
+                    break;
+                default:
+                    System.out.println("Opção inválida!");
+            }
 
-
-            //======FIM DO LOGIN
-
-        }while();
-
-
-
-
-
-
-
+        } while (true);
+        scanner.close();
     }
 }

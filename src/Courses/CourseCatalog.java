@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CourseCatalog {
-    private Map<String, Course> catalogoDeCursos = new HashMap<>();
+    private final Map<String, Course> catalogoDeCursos = new HashMap<>();
 
     public CourseCatalog(){
 
@@ -18,6 +18,12 @@ public class CourseCatalog {
     }
 
     public void listarCursos(){
-        //this.catalogoDeCursos.
+        if(catalogoDeCursos.isEmpty()){
+            System.out.println("Nenhum curso disponivel.");
+            return;
+        }
+        catalogoDeCursos.values().forEach(curso -> 
+            System.out.println(curso.getTitle() + " - " + curso.getDifficultyLevel())
+        );
     }
 }

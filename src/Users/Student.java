@@ -3,9 +3,7 @@ package Users;
 import Courses.Course;
 import Courses.Enrollment;
 import Courses.SubscriptionPlan;
-
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Student extends User{
     private ArrayList<Enrollment> listaDeMatriculasAtuais = new ArrayList<>();

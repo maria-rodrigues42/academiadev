@@ -41,7 +41,7 @@ public class Course {
     }
 
     public void setInstructorName(String instructorName) {
-        instructorName = instructorName;
+        this.instructorName = instructorName;
     }
 
     public Duration getDuration() {
@@ -57,7 +57,7 @@ public class Course {
     }
 
     public void setDifficultyLevel(String difficultyLevel) {
-        difficultyLevel = difficultyLevel;
+        this.difficultyLevel = difficultyLevel;
     }
 
     public String getStatus() {
